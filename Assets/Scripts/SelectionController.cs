@@ -5,22 +5,35 @@ using UnityEngine;
 
 public class SelectionController : MonoBehaviour
 {
-    public List<Tile> SelectedTiles = new List<Tile>();
+    private List<Tile> _selectedTiles = new List<Tile>();
+
+    public List<Tile> SelectedTiles
+    {
+        get => _selectedTiles;
+        set => _selectedTiles = value;
+    }
     
-    [SerializeField] private bool isSelect;
-    public bool IsSelect => isSelect;
+    private string _currentWord;
+
+    public string CurrentWord
+    {
+        get => _currentWord;
+        set => _currentWord = value;
+    }
+
+    private bool _isPointerDown;
+    public bool IsPointerDown => _isPointerDown;
+
+
     private void Update()
     {
         if (Input.GetMouseButton(0))
         {
-            isSelect = true;
+            _isPointerDown = true;
         }
         else
         {
-            isSelect = false;
+            _isPointerDown = false;
         }
     }
-
-    
-    
 }
