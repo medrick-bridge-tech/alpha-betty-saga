@@ -18,6 +18,9 @@ public class Tile : MonoBehaviour
     private string _letter;
     private bool _isSelectable = true;
 
+    private const float DISTANCE_BETWEEN_TILES = 0.25f;
+    private const float TILE_FALLING_SPEED = 2.5f;
+    
 
     void Awake()
     {
@@ -37,6 +40,11 @@ public class Tile : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        CheckRaycast();
+    }
+
     private void OnMouseOver()
     {
         if (_selectionController.IsPointerDown && _isSelectable)
@@ -54,6 +62,10 @@ public class Tile : MonoBehaviour
         if (_selectionController.CurrentWord.Length >= 3 && _wordFinder.DetectWord(_selectionController.CurrentWord))
         {
             Debug.Log(true);
+            foreach (var tile in _selectionController.SelectedTiles)
+            {
+                Destroy(tile.gameObject);
+            }
         }
         else
         {
@@ -67,5 +79,16 @@ public class Tile : MonoBehaviour
         
         _selectionController.SelectedTiles = new List<Tile>();
         _selectionController.CurrentWord = null;
+    }
+
+    private void CheckRaycast()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, DISTANCE_BETWEEN_TILES);
+        
+        if (hit.collider == null)
+        {
+            transform.position = Vector2.Lerp(transform.position,
+                new Vector2(transform.position.x, transform.position.y - DISTANCE_BETWEEN_TILES), TILE_FALLING_SPEED);
+        }
     }
 }
