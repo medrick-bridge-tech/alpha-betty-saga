@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,6 +12,7 @@ public class Tile : MonoBehaviour
 {
     [SerializeField] private Material _greenMaterial;
     [SerializeField] private Material _defaultMaterial;
+    [SerializeField] private GameObject _explosionParticles;
     
     private SelectionController _selectionController;
     private WordFinder _wordFinder;
@@ -64,6 +66,8 @@ public class Tile : MonoBehaviour
             Debug.Log(true);
             foreach (var tile in _selectionController.SelectedTiles)
             {
+                var tilePosition = new Vector2(tile.transform.position.x, tile.transform.position.y + 0.38f);
+                Instantiate(_explosionParticles, tilePosition, quaternion.identity);
                 Destroy(tile.gameObject);
             }
         }

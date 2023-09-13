@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _greenMaterial: {fileID: 2100000, guid: ffea3e540f3ac8a439c99a7c79ff9df0, type: 2}
   _defaultMaterial: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  _explosionParticles: {fileID: 972447050641085222, guid: 940e082f6ea5c3044bcce678f2fed0e4, type: 3}
 --- !u!1 &374855412352726586
 GameObject:
   m_ObjectHideFlags: 0
