@@ -16,22 +16,37 @@ public class Tile : MonoBehaviour
     
     private SelectionController _selectionController;
     private WordFinder _wordFinder;
-    
+
+    private TextMeshPro _text;
     private string _letter;
     private bool _isSelectable = true;
 
     private const float DISTANCE_BETWEEN_TILES = 0.25f;
     private const float TILE_FALLING_SPEED = 2.5f;
+    private const int ALPHABET_LETTERS_COUNT = 26;
     
 
     void Awake()
     {
         _wordFinder = FindObjectOfType<WordFinder>();
         _selectionController = FindObjectOfType<SelectionController>();
+
+        _text = GetComponentInChildren<TextMeshPro>();
         
-        var letter = (char) ('A' + Random.Range(0, 26));
-        GetComponentInChildren<TextMeshPro>().text = letter.ToString();
-        _letter = letter.ToString();
+        // var letter = (char) ('A' + Random.Range(0, ALPHABET_LETTERS_COUNT));
+        // GetComponentInChildren<TextMeshPro>().text = letter.ToString();
+        // _letter = letter.ToString();
+    }
+
+    public void SetLetter(string letter)
+    {
+        _text.text = letter;
+        _letter = letter;
+    }
+
+    public void SetRandomLetter()
+    {
+        
     }
 
     void Update()
