@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreCalculator
+public class ScoreCalculator : MonoBehaviour
 {
+    private int _totalScore;
+
     private Dictionary<char, int> _letterPoint = new Dictionary<char, int>()
     {
         { 'a', 1 },
@@ -49,6 +51,8 @@ public class ScoreCalculator
         }
 
         int score = tileCount * letterPoints * 10;
-        return score;
+        _totalScore += score;
+
+        return _totalScore;
     }
 }
