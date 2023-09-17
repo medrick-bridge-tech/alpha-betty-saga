@@ -72,7 +72,6 @@ public class Tile : MonoBehaviour
             _selectionController.SelectedTiles.Add(this);
             _selectionController.CurrentWord += _letter;
             _isSelectable = false;
-            Debug.Log(_selectionController.CurrentWord);
             _uiController.DisplayCurrentWord(_selectionController.CurrentWord);
         }
     }
@@ -91,6 +90,7 @@ public class Tile : MonoBehaviour
             
             var totalScore = _scoreCalculator.CalculateScore(_selectionController.CurrentWord);
             _uiController.UpdateScore(totalScore);
+            _uiController.UpdateMovementsAllowed();
         }
 
         foreach (var tile in _selectionController.SelectedTiles)
