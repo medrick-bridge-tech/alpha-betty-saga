@@ -16,6 +16,7 @@ public class Tile : MonoBehaviour
     
     private SelectionController _selectionController;
     private WordFinder _wordFinder;
+    private ScoreCalculator _scoreCalculator;
 
     private TextMeshPro _text;
     private string _letter;
@@ -30,12 +31,9 @@ public class Tile : MonoBehaviour
     {
         _wordFinder = FindObjectOfType<WordFinder>();
         _selectionController = FindObjectOfType<SelectionController>();
+        _scoreCalculator = new ScoreCalculator();
 
         _text = GetComponentInChildren<TextMeshPro>();
-        
-        // var letter = (char) ('A' + Random.Range(0, ALPHABET_LETTERS_COUNT));
-        // GetComponentInChildren<TextMeshPro>().text = letter.ToString();
-        // _letter = letter.ToString();
     }
 
     public void SetLetter(string letter)
@@ -46,7 +44,9 @@ public class Tile : MonoBehaviour
 
     public void SetRandomLetter()
     {
-        
+        var letter = (char) ('A' + Random.Range(0, ALPHABET_LETTERS_COUNT));
+        GetComponentInChildren<TextMeshPro>().text = letter.ToString();
+        _letter = letter.ToString();
     }
 
     void Update()
@@ -78,23 +78,21 @@ public class Tile : MonoBehaviour
     {
         if (_selectionController.CurrentWord.Length >= 3 && _wordFinder.DetectWord(_selectionController.CurrentWord))
         {
-            Debug.Log(true);
             foreach (var tile in _selectionController.SelectedTiles)
             {
                 var tilePosition = new Vector2(tile.transform.position.x, tile.transform.position.y + 0.38f);
-                Instantiate(_explosionParticles, tilePosition, quaternion.identity);
+                var particles = Instantiate(_explosionParticles, tilePosition, quaternion.identity);
+                Destroy(particles, 0.5f);
                 Destroy(tile.gameObject);
             }
         }
-        else
-        {
-            Debug.Log(false);
-        }
-        
+
         foreach (var tile in _selectionController.SelectedTiles)
         {
             tile.GetComponent<SpriteRenderer>().material = _defaultMaterial;
         }
+
+        Debug.Log(_scoreCalculator.CalculateScore(_selectionController.CurrentWord));
         
         _selectionController.SelectedTiles = new List<Tile>();
         _selectionController.CurrentWord = null;

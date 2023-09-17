@@ -24,6 +24,8 @@ public class SpawnController : MonoBehaviour
             
             newTile.transform.position = Vector2.Lerp(newTile.transform.position,
                 new Vector2(transform.position.x, transform.position.y - 0.15f), 5f);
+            
+            newTile.GetComponent<Tile>().SetRandomLetter();
         }
     }
 }
