@@ -73,6 +73,7 @@ public class Tile : MonoBehaviour
             _selectionController.CurrentWord += _letter;
             _isSelectable = false;
             Debug.Log(_selectionController.CurrentWord);
+            _uiController.DisplayCurrentWord(_selectionController.CurrentWord);
         }
     }
 

@@ -6,7 +6,7 @@ using System.Linq;
 
 public class GridInitializer : MonoBehaviour
 {
-    [SerializeField] private GridConfig _gridConfig;
+    [SerializeField] private LevelConfig _levelConfig;
     
 
     void Start()
@@ -14,11 +14,11 @@ public class GridInitializer : MonoBehaviour
         var tiles = FindObjectsOfType<Tile>();
         var sortedTiles = tiles.OrderBy(tile => tile.gameObject.name).ToArray();
         
-        for (int i = 0; i < _gridConfig.TileRows.Count; i++)
+        for (int i = 0; i < _levelConfig.GridConfig.TileRows.Count; i++)
         {
-            for (int j = 0; j < _gridConfig.TileRows[i].TileData.Count; j++)
+            for (int j = 0; j < _levelConfig.GridConfig.TileRows[i].TileData.Count; j++)
             {
-                sortedTiles[i * _gridConfig.TileRows.Count + j].SetLetter(_gridConfig.TileRows[i].TileData[j].TileLetter);
+                sortedTiles[i * _levelConfig.GridConfig.TileRows.Count + j].SetLetter(_levelConfig.GridConfig.TileRows[i].TileData[j].TileLetter);
             }
         }
     }
