@@ -45,23 +45,25 @@ public class UIController : MonoBehaviour
     {
         _panel.SetActive(true);
         _popupText.text = "You lose!";
-        DisableTiles();
+        StartCoroutine(DisableTiles());
     }
     
     public void ShowWinPopup()
     {
         _panel.SetActive(true);
         _popupText.text = "You win!";
-        DisableTiles();
+        StartCoroutine(DisableTiles());
     }
 
-    private void DisableTiles()
+    private IEnumerator DisableTiles()
     {
+        yield return new WaitForSeconds(1);
+        
         var tiles = FindObjectsOfType<Tile>();
     
         foreach (var tile in tiles)
         {
-            tile.enabled = false;
+            tile.FinishGame();
         }
     }
 }

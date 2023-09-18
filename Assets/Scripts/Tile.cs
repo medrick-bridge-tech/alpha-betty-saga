@@ -21,13 +21,14 @@ public class Tile : MonoBehaviour
 
     private TextMeshPro _text;
     private string _letter;
+    private bool isGameFinished;
     private bool _isSelectable = true;
 
     private const float DISTANCE_BETWEEN_TILES = 0.25f;
     private const float TILE_FALLING_SPEED = 2.5f;
     private const int ALPHABET_LETTERS_COUNT = 26;
-    
 
+    
     void Awake()
     {
         _wordFinder = FindObjectOfType<WordFinder>();
@@ -38,21 +39,13 @@ public class Tile : MonoBehaviour
         _text = GetComponentInChildren<TextMeshPro>();
     }
 
-    public void SetLetter(string letter)
-    {
-        _text.text = letter;
-        _letter = letter;
-    }
-
-    public void SetRandomLetter()
-    {
-        var letter = (char) ('a' + Random.Range(0, ALPHABET_LETTERS_COUNT));
-        GetComponentInChildren<TextMeshPro>().text = letter.ToString();
-        _letter = letter.ToString();
-    }
-
     void Update()
     {
+        if (isGameFinished)
+        {
+            return;
+        }
+        
         if (Input.GetMouseButtonUp(0))
         {
             _isSelectable = true;
@@ -66,7 +59,7 @@ public class Tile : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (_selectionController.IsPointerDown && _isSelectable)
+        if (!isGameFinished && _selectionController.IsPointerDown && _isSelectable)
         {
             GetComponent<SpriteRenderer>().material = _greenMaterial;
             _selectionController.SelectedTiles.Add(this);
@@ -78,7 +71,7 @@ public class Tile : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (_selectionController.CurrentWord.Length >= 3 && _wordFinder.DetectWord(_selectionController.CurrentWord))
+        if (!isGameFinished && _selectionController.CurrentWord.Length >= 3 && _wordFinder.DetectWord(_selectionController.CurrentWord))
         {
             foreach (var tile in _selectionController.SelectedTiles)
             {
@@ -110,6 +103,19 @@ public class Tile : MonoBehaviour
         _selectionController.SelectedTiles = new List<Tile>();
         _selectionController.CurrentWord = null;
     }
+    
+    public void SetLetter(string letter)
+    {
+        _text.text = letter;
+        _letter = letter;
+    }
+
+    public void SetRandomLetter()
+    {
+        var letter = (char) ('a' + Random.Range(0, ALPHABET_LETTERS_COUNT));
+        GetComponentInChildren<TextMeshPro>().text = letter.ToString();
+        _letter = letter.ToString();
+    }
 
     private void CheckRaycast()
     {
@@ -120,5 +126,10 @@ public class Tile : MonoBehaviour
             transform.position = Vector2.Lerp(transform.position,
                 new Vector2(transform.position.x, transform.position.y - DISTANCE_BETWEEN_TILES), TILE_FALLING_SPEED);
         }
+    }
+
+    public void FinishGame()
+    {
+        isGameFinished = true;
     }
 }
