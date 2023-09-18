@@ -91,6 +91,15 @@ public class Tile : MonoBehaviour
             var totalScore = _scoreCalculator.CalculateScore(_selectionController.CurrentWord);
             _uiController.UpdateScore(totalScore);
             _uiController.UpdateMovementsAllowed();
+
+            if (_uiController.MovementsAllowed <= 0 && totalScore < _uiController.LevelConfig.ScoreRequiredToWin)
+            {
+                _uiController.ShowLosePopup();
+            }
+            else if (totalScore >= _uiController.LevelConfig.ScoreRequiredToWin)
+            {
+                _uiController.ShowWinPopup();
+            }
         }
 
         foreach (var tile in _selectionController.SelectedTiles)

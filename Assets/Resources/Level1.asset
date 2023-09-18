@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76dfaf8c0670450429ea02b41d6a3884, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  _movementsAllowed: 20
+  _movementsAllowed: 7
   _scoreRequiredToWin: 2100
   _gridConfig: {fileID: 11400000, guid: cfa8937ebea22a040b3829cf1cebc475, type: 2}

@@ -5,14 +5,18 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    [SerializeField] private LevelConfig _levelConfig;
     [SerializeField] private Text _scoreText;
     [SerializeField] private Text _currentWordText;
     [SerializeField] private Text _movementsAllowedText;
+    [SerializeField] private Text _popupText;
+    [SerializeField] private GameObject _panel;
+    [SerializeField] private LevelConfig _levelConfig;
+    public LevelConfig LevelConfig => _levelConfig;
 
     private int _movementsAllowed;
-    
-    
+    public int MovementsAllowed => _movementsAllowed;
+
+
     void Start()
     {
         _scoreText.text = "0 / " + _levelConfig.ScoreRequiredToWin;
@@ -35,5 +39,17 @@ public class UIController : MonoBehaviour
     {
         _movementsAllowed--;
         _movementsAllowedText.text = _movementsAllowed.ToString();
+    }
+
+    public void ShowLosePopup()
+    {
+        _panel.SetActive(true);
+        _popupText.text = "You lose!";
+    }
+    
+    public void ShowWinPopup()
+    {
+        _panel.SetActive(true);
+        _popupText.text = "You win!";
     }
 }
