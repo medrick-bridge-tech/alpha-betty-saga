@@ -85,8 +85,8 @@ public class Tile : MonoBehaviour
                 var tilePosition = new Vector2(tile.transform.position.x, tile.transform.position.y + 0.38f);
                 var particles = Instantiate(_explosionParticles, tilePosition, quaternion.identity);
                 tile.animator.Play("Explode");
-                Destroy(particles, 0.5f);
-                Destroy(tile.gameObject, 0.25f);
+                Destroy(particles, 0.3f);
+                Destroy(tile.gameObject, 0.3f);
                 
                 audioSource.pitch = GetAudioPitch(_selectionController.SelectedTiles.Count);
                 audioSource.PlayOneShot(_matchAudioClip);

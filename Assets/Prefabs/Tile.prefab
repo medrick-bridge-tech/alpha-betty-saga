@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86386b6c6dedf12439c7a44fa3a970c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionParticles: {fileID: 1431964427323432635, guid: a623c118c56614947bdbed988eb4f6d4, type: 3}
+  _explosionParticles: {fileID: 100000, guid: f2dba9e16cd347f44a395b8204544ee5, type: 3}
   _matchAudioClip: {fileID: 8300000, guid: cb1233d87e8fb724f976bbb5ad15bec0, type: 3}
   outline: {fileID: 4009792501297201005}
 --- !u!95 &6280937359475800534
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4288334440
-  m_fontColor: {r: 0.40744036, g: 0.7924528, b: 0.6039633, a: 1}
+  m_fontColor: {r: 0, g: 0.8352941, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -381,7 +381,7 @@ Transform:
   m_GameObject: {fileID: 4009792501297201005}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2285464, y: 1.2285464, z: 1.2285464}
+  m_LocalScale: {x: 1.22, y: 1.22, z: 1.22}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8875217235139755545}
