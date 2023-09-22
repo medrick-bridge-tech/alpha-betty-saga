@@ -3899,6 +3899,7 @@ MonoBehaviour:
   _winAudioClip: {fileID: 8300000, guid: e1943f67b76042442aa9e9380d871df3, type: 3}
   _loseAudioClip: {fileID: 8300000, guid: a74f93f570573db4e8c7a01157961661, type: 3}
   _winParticles: {fileID: 8455137322906582785, guid: 734855b24aa8b6b4794e8b37e9059d47, type: 3}
+  _scoreUpText: {fileID: 6598383253802249011, guid: 89877d3cc87cd2941a07d92208fc94f3, type: 3}
   _levelConfig: {fileID: 11400000, guid: 31eead72ef2325b45bba166610f611ac, type: 2}
 --- !u!114 &2089228377
 MonoBehaviour:

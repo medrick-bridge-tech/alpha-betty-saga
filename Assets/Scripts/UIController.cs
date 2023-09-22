@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private AudioClip _winAudioClip;
     [SerializeField] private AudioClip _loseAudioClip;
     [SerializeField] private GameObject _winParticles;
+    [SerializeField] private TextMeshPro _scoreUpText;
     [SerializeField] private LevelConfig _levelConfig;
     public LevelConfig LevelConfig => _levelConfig;
 
@@ -76,5 +78,12 @@ public class UIController : MonoBehaviour
         {
             tile.FinishGame();
         }
+    }
+
+    public void InstantiateScoreUpText(Vector3 position, int score)
+    {
+        var newScoreUpText = Instantiate(_scoreUpText, position + Vector3.back, Quaternion.identity);
+        newScoreUpText.text = score.ToString();
+        Destroy(newScoreUpText.gameObject, 3);
     }
 }

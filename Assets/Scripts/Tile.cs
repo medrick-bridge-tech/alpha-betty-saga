@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using TMPro;
 using Unity.Mathematics;
@@ -82,6 +83,9 @@ public class Tile : MonoBehaviour
     {
         if (!isGameFinished && _selectionController.CurrentWord.Length >= 3 && _wordFinder.DetectWord(_selectionController.CurrentWord))
         {
+            var matchScore = _scoreCalculator.CalculateMatchScore(_selectionController.CurrentWord);
+            _uiController.InstantiateScoreUpText(_selectionController.SelectedTiles.Last().transform.position + new Vector3(0, 0.38f, 0), matchScore);
+            
             foreach (var tile in _selectionController.SelectedTiles)
             {
                 var tilePosition = new Vector2(tile.transform.position.x, tile.transform.position.y + 0.38f);
@@ -94,7 +98,7 @@ public class Tile : MonoBehaviour
                 audioSource.PlayOneShot(_matchAudioClip);
             }
             
-            var totalScore = _scoreCalculator.CalculateScore(_selectionController.CurrentWord);
+            var totalScore = _scoreCalculator.CalculateTotalScore(matchScore);
             _uiController.UpdateScore(totalScore);
             _uiController.UpdateMovementsAllowed();
 

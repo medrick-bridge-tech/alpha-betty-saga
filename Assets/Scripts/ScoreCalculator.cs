@@ -36,8 +36,8 @@ public class ScoreCalculator : MonoBehaviour
         { 'z', 4 }
     };
     
-
-    public int CalculateScore(string word)
+    
+    public int CalculateMatchScore(string word)
     {
         int tileCount = word.Length;
         int letterPoints = 0;
@@ -51,7 +51,13 @@ public class ScoreCalculator : MonoBehaviour
         }
 
         int score = tileCount * letterPoints * 10;
-        _totalScore += score;
+
+        return score;
+    }
+
+    public int CalculateTotalScore(int matchScore)
+    {
+        _totalScore += matchScore;
 
         return _totalScore;
     }
