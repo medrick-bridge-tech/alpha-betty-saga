@@ -76,6 +76,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _explosionParticles: {fileID: 100000, guid: f2dba9e16cd347f44a395b8204544ee5, type: 3}
   _matchAudioClip: {fileID: 8300000, guid: cb1233d87e8fb724f976bbb5ad15bec0, type: 3}
+  _hoverAudioClip: {fileID: 8300000, guid: 7fe5f56e9df696341b79c580729818e8, type: 3}
   outline: {fileID: 4009792501297201005}
 --- !u!95 &6280937359475800534
 Animator:

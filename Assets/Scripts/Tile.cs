@@ -13,6 +13,7 @@ public class Tile : MonoBehaviour
 {
     [SerializeField] private GameObject _explosionParticles;
     [SerializeField] private AudioClip _matchAudioClip;
+    [SerializeField] private AudioClip _hoverAudioClip;
     [SerializeField] private GameObject outline;
 
     private SelectionController _selectionController;
@@ -67,6 +68,7 @@ public class Tile : MonoBehaviour
     {
         if (!isGameFinished && _selectionController.IsPointerDown && _isSelectable)
         {
+            audioSource.PlayOneShot(_hoverAudioClip);
             outline.SetActive(true);
             animator.Play("SelectBox");
             _selectionController.SelectedTiles.Add(this);
