@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,11 +11,16 @@ public class UIController : MonoBehaviour
     [SerializeField] private Text _movementsAllowedText;
     [SerializeField] private Text _popupText;
     [SerializeField] private GameObject _panel;
+    [SerializeField] private AudioClip _winAudioClip;
+    [SerializeField] private AudioClip _loseAudioClip;
+    [SerializeField] private GameObject _winParticles;
     [SerializeField] private LevelConfig _levelConfig;
     public LevelConfig LevelConfig => _levelConfig;
 
     private int _movementsAllowed;
     public int MovementsAllowed => _movementsAllowed;
+
+    private AudioSource _audioSource;
 
 
     void Start()
@@ -23,6 +29,8 @@ public class UIController : MonoBehaviour
         
         _movementsAllowed = _levelConfig.MovementsAllowed;
         _movementsAllowedText.text = _movementsAllowed.ToString();
+
+        _audioSource = GetComponent<AudioSource>();
     }
     
     public void UpdateScore(int score)
@@ -45,6 +53,7 @@ public class UIController : MonoBehaviour
     {
         _panel.SetActive(true);
         _popupText.text = "You lose!";
+        _audioSource.PlayOneShot(_loseAudioClip);
         StartCoroutine(DisableTiles());
     }
     
@@ -52,6 +61,8 @@ public class UIController : MonoBehaviour
     {
         _panel.SetActive(true);
         _popupText.text = "You win!";
+        _audioSource.PlayOneShot(_winAudioClip);
+        Instantiate(_winParticles, Vector3.up * 3, quaternion.identity);
         StartCoroutine(DisableTiles());
     }
 
