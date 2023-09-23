@@ -7,14 +7,10 @@ using UnityEngine;
 public class WordFinder : MonoBehaviour
 {
     private List<string> _words = new List<string>();
-    
-    private SelectionController _selectionController;
 
 
     void Awake()
     {
-        _selectionController = FindObjectOfType<SelectionController>();
-        
         var words = File.ReadAllLines($"D:/Projects/words.txt");
         
         foreach (var word in words)
@@ -27,7 +23,7 @@ public class WordFinder : MonoBehaviour
     {
         foreach (var word in _words)
         {
-            if (selectedWord.ToLower() == word)
+            if (selectedWord == word)
             {
                 return true;
             }
